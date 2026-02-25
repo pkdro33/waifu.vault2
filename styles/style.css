@@ -1,0 +1,662 @@
+
+
+/* Estilos globales y variables de diseño para Waifu Vault */
+
+
+:root {
+    /* Fondos (Los bloques base de tu mundo) */
+    --fondo-principal: #FFF9F1;  /* Crema encaje */
+    --fondo-suave: #FDF0F3;      /* Rosa muy tenue para secciones */
+
+    /* Marca y Acentos (Los detalles decorativos) */
+    --color-primario: #FBADBE;   /* Rosa Sakura */
+    --color-boton: #FF8E9E;      /* Rosa intenso para llamar a la acción */
+    --color-detalle: #E7C687;    /* Dorado cabello de Marin */
+
+    /* Texto y Contraste */
+    --color-texto: #5B6D8A;      /* Azul pizarra suave */
+    
+    --fuente-titulo: 'Playfair Display', serif;
+    --fuente-texto: 'Poppins', sans-serif;
+    --fuente-secciones: 'Amatic SC', cursive; /* Para los h2 del resto de la página */
+}
+
+
+
+body {
+    font-family: var(--fuente-texto); /* Por defecto todo será Poppins */
+    color: var(--color-texto);
+    background-color: var(--fondo-principal);
+    margin: 0;}
+
+
+
+/* =========================================
+   CLASES REUTILIZABLES (Tus "Prefabs")
+========================================= */
+
+/* Esta clase la usarás para centrar y dar aire a cualquier sección */
+.seccion-centrada {
+    padding: 100px 20px 65px 20px; /* Espacio generoso arriba y abajo, y un poco a los lados */
+    text-align: center;
+}
+
+/* Esta clase es para TODOS los títulos de tus secciones (h2) */
+.titulo-seccion {
+    font-family: var(--fuente-titulo);
+    color: var(--color-texto);
+    font-size: 3rem; /* Las fuentes handwritten suelen necesitar ser más grandes */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+
+/* Esta clase es para los párrafos descriptivos anchos y elegantes */
+.texto-seccion {  
+    font-family: var(--fuente-texto);
+    color: var(--color-texto);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto; /* El truco mágico para centrar la caja */
+}
+
+
+
+
+/* =========================================
+   SECCIÓN HEADER
+========================================= */
+
+
+header {
+    background-color: var(--fondo-principal); /* Fondo crema para el header */
+    padding: 0px 150px; /* Le di 50px a los lados para que no pegue a la pantalla */
+    
+    /* ¡Magia Flexbox! */
+    display: flex;
+    justify-content: space-between; /* Esto empuja al Logo a la izq. y al Nav a la der. */
+    align-items: center; /* Los alinea perfectamente en el centro vertical */
+    position: sticky;  /* Le dice que se vuelva "pegajoso" al hacer scroll */
+    top: 0;            /* Se pegará exactamente a 0 píxeles del borde superior */
+    z-index: 1000;     /* Lo pone en la capa más alta para que nada lo tape */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil para darle profundidad */
+}
+
+    /* EL ESCUADRÓN 1 (El Logo) */
+    header a img {
+        width: 90px; /* Tamaño fijo, adiós al fantasma del 5% */
+        height: auto; /* Mantiene la proporción para que no se estire feo */
+        transition: transform 0.3s ease; /* Transición suave para el efecto hover */
+    }
+        header a img:hover{
+            transform: scale(1.05); /* Un pequeño zoom al pasar el mouse, como un saludo coqueto */
+
+        }
+
+    /* EL ESCUADRÓN 2 (El Menú) */
+    /* Ya no necesitamos ponerle flex-direction o justify-content al nav mismo */
+
+    header nav ul {
+        display: flex;
+        /* flex-direction: row; <- No hace falta, Flexbox usa 'row' por defecto */
+        gap: 40px; /* Separación perfecta estilo pastelería */
+        margin: 0;
+        padding: 0;
+    }
+
+        header nav ul li {
+            list-style: none;
+        }
+
+            header nav ul li a {
+                text-decoration: none;
+                color: black;
+                font-weight: 600; /* Le da el grosor de la imagen de referencia */
+                font-size: 16px; /* Un texto sutil y elegante */
+                letter-spacing: 1px; /* Espacio entre letras para que se vea más "Luxury" */
+                text-transform: uppercase; /* Vuelve todo MAYÚSCULA como en tu referencia */
+                transition: color 0.3s ease, transform 0.3s ease; /* Transición suave para el hover */
+                display: inline-block;  /* ← AGREGAR ESTO */
+                padding: 8px 0;         /* ← AGREGAR ESTO (espaciado visual) */
+            }
+
+                header nav ul li a:hover {
+                    color: var(--color-primario); /* El rosa Sakura para el hover */
+                    transform: translatey(-2px); /* Sutil elevación para un efecto "flotante" */
+                }
+
+
+
+/* =========================================
+   SECCIÓN HERO (Fondo Completo)
+========================================= */
+
+.hero {
+    /* 1. CONFIGURACIÓN DE LA IMAGEN DE FONDO */
+    background-image: url('../assets/images/banner.jpg');
+    background-size: cover; /* Esto hace que la imagen se estire para cubrir todo sin deformarse */
+    background-position: center right; /* Centra la imagen, priorizando ver el lado derecho */
+    background-repeat: no-repeat; /* Evita que la imagen se repita como mosaico */
+    
+    /* 2. CONFIGURACIÓN DEL ESPACIO */
+    min-height: 80vh; /* Ocupará el 80% de la altura de la pantalla del usuario */
+    padding: 80px 150px; /* Mantienes tu alineación perfecta con el Header */
+    
+    /* 3. ALINEACIÓN DEL TEXTO (Flexbox) */
+    display: flex;
+    align-items: center; /* Centra el texto verticalmente */
+    justify-content: flex-start; /* Mantiene el texto pegado a la izquierda */
+}
+
+/* La caja del texto no debe ser más ancha del 50% para no tapar la figura */
+.hero-contenido {
+    max-width: 50%; 
+}
+
+    /* Tipografía de la referencia */
+    .hero-contenido h1 {
+        font-family: var(--fuente-titulo);
+        font-size: 5rem; /* Bien grande */
+        color: var(--fondo-principal);
+        line-height: 1.1; 
+        margin-bottom: 40px; 
+        margin-top: 0;
+    }
+
+/* El botón coquette */
+.btn-principal {
+    display: inline-block; /* Esto hace que el enlace se comporte como un botón, permitiendo padding y hover */
+    background-color: var(--color-primario);
+    color: #1A1A1A;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--fuente-texto);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+}
+
+    .btn-principal:hover {
+        transform: translateY(-3px) translateX(-3px); 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        background-color: var(--fondo-suave); 
+    }
+
+
+
+/* =========================================
+   SECCIÓN TIENDA (CSS Grid Maestro)
+========================================= */
+
+/* 1. EL LAYOUT PRINCIPAL (2 Columnas) */
+.layout-tienda {
+    display: grid;
+    /* Imagina una pizza de 3 rebanadas. Le damos 2 rebanadas (2fr) a la galería 
+       y 1 rebanada (1fr) a la promoción. ¡Proporción perfecta! */
+    grid-template-columns: 2fr 1fr; 
+    gap: 40px; /* Espacio entre la galería y la promo */
+    margin-top: 50px; /* Lo separamos un poco del título de arriba */
+    align-items: center; /* Centra la promo verticalmente */
+}
+
+    /* 2. LA GALERÍA DE PRODUCTOS (3 Columnas) */
+    .galeria-productos {
+        display: grid;
+        /* En vez de escribir 1fr 1fr 1fr, usamos repeat para ser más limpios */
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px; /* Espacio entre cada figura */
+    }
+
+        /* 3. ESTILO DE LA TARJETA DE PRODUCTO (Vibe Pastelería) */
+        .producto {
+            background-color: #ffffff; /* Fondo blanco limpio */
+            padding: 15px; 
+            border-radius: 10px; /* Bordes suaves */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra MUY suave, casi invisible */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            /* Efecto hover coqueto */
+            .producto:hover {
+                transform: translateY(-8px); /* Flota hacia arriba */
+                box-shadow: 0 10px 25px rgba(251, 173, 190, 0.2); /* Sombra color Sakura */
+            }
+
+            .producto img {
+                width: 100%; /* La imagen ocupa todo el ancho de su tarjeta */
+                border-radius: 5px;
+                margin-bottom: 15px;
+                /* 🌟 PRO-TIP DE DISEÑADOR SENIOR 🌟 */
+                aspect-ratio: 1 / 1; /* Obliga a la imagen a ser un cuadrado perfecto (1 de ancho x 1 de alto) */
+                object-fit: cover;   /* Evita que la figura se aplaste o estire. Funciona como un zoom automático para rellenar el cuadrado. */
+            }
+
+            .producto h3 {
+                font-family: var(--fuente-texto);
+                font-size: 1rem;
+                color: var(--color-texto);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 5px;
+            }
+
+            .producto h4 {
+                font-family: var(--fuente-titulo);
+                font-size: 1.6rem;
+                color: var(--color-boton); /* Rosa intenso para destacar el precio */
+            }
+
+/* 4. LA PROMOCIÓN LATERAL */
+.promo-lateral {
+    text-align: center;
+    padding: 20px;
+}
+
+    .promo-lateral h3 {
+        font-family: var(--fuente-titulo); /* O tu fuente handwritten si prefieres */
+        font-size: 3rem;
+        color: var(--color-texto);
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+
+    .promo-lateral p {
+        font-family: var(--fuente-texto);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: var(--color-texto);
+    }
+
+    .precio-promo {
+        font-family: var(--fuente-titulo);
+        font-size: 2.5rem;
+        color: var(--color-texto);
+        margin-bottom: 25px;
+    }
+
+
+
+
+/* =========================================
+   SECCIÓN PROMOOOOOO
+
+========================================= */
+
+.promo {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% para el texto, 50% para la foto */
+    margin: 50px 0 0 0; /* Separamos un poco la sección de las demás */
+    
+    /* En la referencia hay una pequeña línea blanca separando ambas mitades. 
+       Podemos lograrlo dándole un fondo blanco a la sección y un gap! */
+    background-color: var(--fondo-principal);
+    gap: 5px; 
+}
+
+    /* 1. LA CAJA IZQUIERDA (Fondo Rosa) */
+    .promo-contenido {
+        background-color: var(--color-primario); /* El rosa Sakura para el fondo */
+        padding: 80px 10%; /* Mucho aire para que se vea premium */
+    
+        /* Usamos Flexbox aquí adentro para centrar el texto verticalmente */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Empuja todo al centro vertical */
+    }
+
+        .promo-contenido h2 {
+            font-family: var(--fuente-titulo); /* Usa la fuente que elegiste para títulos */
+            font-size: 2.2rem;
+            color: #1A1A1A; /* Un color oscuro según la referencia */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .promo-contenido p {
+            font-family: var(--fuente-texto);
+            color: #1A1A1A;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+    /* 2. LOS CÍRCULOS DE REDES SOCIALES */
+    .redes-iconos {
+        display: flex;
+        gap: 15px; /* Espacio entre las bolitas */
+    }
+
+        .redes-iconos a {
+            /* Magia para hacer círculos perfectos */
+            display: inline-flex; /* Esto hace que el enlace se comporte como un contenedor flexible, perfecto para centrar el ícono dentro del círculo */
+            align-items: center; /* Centra el ícono verticalmente */
+            justify-content: center; /* Centra el ícono horizontalmente */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Esto convierte el cuadrado en círculo */
+    
+            background-color: #1A1A1A; /* Círculo oscuro como en tu foto */
+            color: #ffffff; /* Ícono blanco */
+            font-size: 1.5rem; /* Tamaño del ícono de FontAwesome */
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+            .redes-iconos a:hover {
+                background-color: var(--color-boton); /* Se vuelve rosa al pasar el mouse */
+                transform: translateY(-5px); /* Salta un poquito */
+            }
+
+/* 3. LA CAJA DERECHA (La Imagen) */
+.promo-imagen {
+    /* Nos aseguramos de que esta caja ocupe el 100% de su mitad */
+    width: 100%;
+    height: 100%;
+}
+
+    .promo-imagen img {
+        width: 100%;
+        height: 100%;
+    
+        /* 🌟 EL TRUCO ESTRELLA DE NUEVO 🌟 */
+        object-fit: cover; /* Evita que la imagen se estire feo. La recorta como un fondo. */
+    }
+
+
+
+    /* =========================================
+   SECCIÓN NOSOTROS
+
+========================================= */
+.nosotros {
+    /* Le damos un fondo crema suave y mucho espacio para respirar */
+    background-color: var(--fondo-suave);
+    padding: 100px 150px; /* Mantenemos el margen lateral de 150px de tu Header y Hero */
+}
+
+/* 1. PARTE SUPERIOR (Imagen y Texto) */
+.nosotros-superior {
+    display: flex;
+    align-items: center; /* Centra ambos elementos verticalmente */
+    gap: 60px; /* Separación grande entre la foto y el texto */
+    margin-bottom: 80px; /* Espacio antes de que empiecen las cajitas de valores */
+}
+
+.nosotros-superior img {
+    width: 50%; /* La imagen ocupa la mitad */
+    border-radius: 20px; /* Bordes suaves estilo Coquette */
+    box-shadow: var(--sombra-delicada); /* Tu sombra definida en el :root */
+    object-fit: cover;
+}
+
+/* El div que envuelve el texto (Ocupa la otra mitad) */
+.nosotros-superior > div {
+    width: 50%;
+}
+
+.nosotros-superior h2 {
+    font-family: var(--fuente-titulo); /* Usa la fuente que elegiste para títulos */
+    font-size: 2.2rem;
+    color: var(--color-texto);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.nosotros-superior p {
+    font-family: var(--fuente-texto);
+    color: var(--color-texto);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+
+/* 2. PARTE INFERIOR (Los 4 Valores - Grid) */
+.nosotros-inferior {
+    display: grid;
+    /* Creamos 4 columnas exactamente iguales */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; /* Espacio entre cada tarjeta de valor */
+}
+
+/* Estilo de cada tarjeta de Valor */
+.valores {
+    background-color: #ffffff; /* Cajas blancas para que resalten sobre el fondo crema */
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra súper tenue */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Agregamos un borde sutil abajo del color dorado/detalle para elegancia */
+    border-bottom: 3px solid var(--color-detalle); 
+}
+
+/* Animación al pasar el mouse por las tarjetas */
+.valores:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(251, 173, 190, 0.15); /* Sombra rosa suave al flotar */
+}
+
+/* Los Íconos (FontAwesome) */
+.valores i {
+    font-size: 2.5rem; /* Íconos grandes */
+    color: var(--color-boton); /* Rosa intenso para destacar */
+    margin-bottom: 20px;
+}
+
+/* Títulos de cada valor */
+.valores h3 {
+    font-family: var(--fuente-texto);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-texto);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* Párrafo de cada valor */
+.valores p {
+    font-family: var(--fuente-texto);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-texto);
+}
+
+
+
+/* =========================================
+   FOOTER (El Gran Final)
+========================================= */
+
+.pie {
+    /* Un azul/gris noche súper elegante. Como la vitrina de noche. */
+    background-color:var(--color-primario); 
+    
+    /* Mantenemos tu margen lateral de 150px para que TODO esté alineado */
+    padding: 10px 20%;
+    
+    /* ¡Activamos el Mapa Grid de 4 ranuras! */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px; /* Separación entre las columnas */
+    align-items: start; /* Todos los elementos se alinean arriba */
+}
+
+/* 1. EL LOGO */
+.elemento-footer img {
+    max-width: 70px; /* Tamaño controlado */
+    max-height: 70px;
+}
+
+/* 2. LOS TÍTULOS */
+.elemento-footer h4 {
+    font-family: var(--fuente-titulo);
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+
+/* 3. LOS TEXTOS */
+.elemento-footer p {
+    font-family: var(--fuente-texto);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px; /* Separación entre cada línea de texto */
+}
+
+/* 4. LAS REDES SOCIALES (Repasando el poder de inline-flex) */
+.iconos-footer {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px 0 0 0; /* Un poco de espacio arriba para que no pegue al texto */
+}
+
+.iconos-footer a {
+    /* Tu técnica secreta para botones con íconos */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Círculo perfecto */
+
+    
+    background-color: #ffffff; /* Círculo blanco para que destaque */
+    color: #1A1A24; /* Ícono oscuro */
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Efecto hover estilo Waifu Vault */
+.iconos-footer a:hover {
+    background-color: var(--color-boton); /* Fondo rosa */
+    color: #ffffff; /* El ícono se vuelve blanco */
+    transform: translateY(-5px); /* Pequeño salto hacia arriba */
+}
+
+.elemento-footer{
+    margin-top: 20px;   
+}
+#img-footer{
+    align-items: end;
+}
+
+
+
+
+
+
+
+
+/* =======================================================
+   📱 RESPONSIVE DESIGN (MODO CELULAR)
+   Todo lo que esté aquí dentro solo se activará en pantallas pequeñas
+======================================================= */
+
+@media (max-width: 768px) {
+
+    /* 1. EL RESET GLOBAL DE ESPACIOS */
+    /* En PC usábamos 150px de espacio lateral. En móvil, eso aplasta todo. 
+       Lo reducimos a 20px para que el contenido respire pero aproveche la pantalla. */
+    header, 
+    .hero, 
+    .nosotros, 
+    .pie {
+        padding: 40px 20px; 
+    }
+
+    /* 2. EL HEADER (Miniatura de PC) */
+    header {
+        /* Eliminamos el flex-direction: column; para que sigan en la misma línea */
+        padding: 15px 20px; /* Reducimos el padding para ganar espacio vital a los lados */
+    }
+
+    /* Achicamos el logo para que no estorbe al menú */
+    header a img {
+        width: 45px; 
+    }
+
+    header nav ul {
+        gap: 12px; /* Juntamos los enlaces para que quepan todos */
+    }
+
+    header nav ul li a {
+        font-size: 0.7rem; /* Reducimos bastante la letra (aprox 11px) */
+        letter-spacing: 0px; /* Quitamos el espaciado extra entre letras */
+        padding: 5px 0;
+    }
+
+    /* 3. EL HERO (La primera impresión) */
+    .hero {
+        background-position: center; /* Centramos la foto de fondo */
+        justify-content: center; /* Centramos el contenido */
+        text-align: center;
+    }
+
+    .hero-contenido {
+        max-width: 100%; /* Ahora la caja de texto ocupa todo el ancho */
+    }
+
+    .hero-contenido h1 {
+        font-size: 3.5rem; /* Achicamos la letra gigante para que no se salga de la pantalla */
+    }
+
+    /* 4. LA TIENDA (Destruyendo el Grid) */
+    .layout-tienda {
+        grid-template-columns: 1fr; /* De 2 columnas pasamos a 1 sola fila vertical */
+        gap: 30px;
+    }
+
+    .galeria-productos {
+        grid-template-columns: 1fr; /* Las 3 figuras ahora van una debajo de otra */
+    }
+
+    /* 5. LA PROMOCIÓN (Split Screen) */
+    .promo {
+        grid-template-columns: 1fr; /* El texto arriba, la foto abajo */
+        margin: 20px 0;
+    }
+
+    .promo-contenido {
+        padding: 40px 20px;
+        text-align: center; /* Centramos el texto para móvil */
+        align-items: center; /* Centramos los botones de redes */
+    }
+
+    /* 6. ACERCA DE NOSOTROS */
+    .nosotros-superior {
+        flex-direction: column; /* La foto arriba, el texto abajo */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .nosotros-superior img,
+    .nosotros-superior > div {
+        width: 100%; /* Ambas cosas ocupan el 100% de la pantalla */
+    }
+
+    .nosotros-inferior {
+        grid-template-columns: 1fr; /* Los 4 valores van en una fila india vertical */
+    }
+
+    /* 7. EL FOOTER */
+    .pie {
+        grid-template-columns: 1fr; /* Las 4 columnas se vuelven 1 */
+        text-align: center; /* Centramos todo para que se vea ordenado */
+        gap: 30px;
+    }
+
+    .iconos-footer {
+        justify-content: center; /* Centramos las bolitas de las redes sociales */
+    }
+
+}
